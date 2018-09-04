@@ -1,13 +1,14 @@
 import unittest
 import CyTestSupport
 
+cyCaller = CyTestSupport.CyCaller()
+
 
 class CytoscapeEndToEndTests(unittest.TestCase):
 
-    cyCaller = CyTestSupport.CyCaller
-
     def test_upper(self):
-        self.assertEqual('foo'.upper(), 'FOO')
+        result = cyCaller.get("/v1/version")
+        self.assertEqual(result['cytoscapeVersion'], '3.7.0-SNAPSHOT')
 
     def test_isupper(self):
         self.assertTrue('FOO'.isupper())
