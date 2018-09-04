@@ -4,12 +4,20 @@ These Python tests are meant to be run alongside an installed Cytoscape release 
 
 ## Setup
 
-These tests are designed to be compatible with Python 2.4-2.7 and 3.0+.
+These tests are designed to be compatible with Python 2.4-2.7 and 3.0+. Python may already be installed on your system; if not, download and install Python from https://www.python.org/
 
-So far, the the following has to be run to install the necessary Python packages:
+Once Python has been installed, the following has to be run to install the necessary Python packages:
 
 ```
 pip install requests
+```
+
+## Execution
+
+Start Cytoscape, then execute the following:
+
+```
+python CytoscapeEndToEndTests.py 
 ```
 
 ## Developers Notes
