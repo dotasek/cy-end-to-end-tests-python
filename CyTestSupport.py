@@ -55,7 +55,8 @@ class CyCaller:
         headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
         if type(data) == dict:
             data = json.dumps(data)
-
+        elif type(data) == list:
+            data = json.dumps(data)
         result = requests.request(http_method,
                                   self.cy_rest_instance.base_url + ":" + str(self.cy_rest_instance.port) + endpoint,
                                   data=data,
