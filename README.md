@@ -12,9 +12,11 @@ Once Python has been installed, the following has to be run to install the neces
 pip install requests
 ```
 
+Then clone this project via git (or download as a zip).
+
 ## Execution
 
-Start Cytoscape, then execute the following:
+Start Cytoscape, then execute the following from within this projects root directory:
 
 ```
 python CytoscapeEndToEndTests.py 
@@ -22,7 +24,15 @@ python CytoscapeEndToEndTests.py
 
 ## Developers Notes
 
-Developed in PyCharm with automated checking of Python version compatibility. There are other methods of doing this, but this requires little dependence on installed packages for testers. To set up PyCharm this way, open `Settings` and navigate to `Editor > Inspections`. From the `Inspections` panel, select `Code compatibility inspection` and check all the boxes between 2.4 and 3.0 inclusive. Click `Apply`. Your editor should now warn when your code is no longer compatible with all those versions.
+After making any changes, execute unit tests via the following:
+
+```
+python CyTestSupportTests
+```
+
+This should return with no failed tests.
+
+This project was developed in PyCharm with automated checking of Python version compatibility. There are other methods of doing this, but this requires little dependence on installed packages for testers. To set up PyCharm this way, open `Settings` and navigate to `Editor > Inspections`. From the `Inspections` panel, select `Code compatibility inspection` and check all the boxes between 2.4 and 3.0 inclusive. Click `Apply`. Your editor should now warn when your code is no longer compatible with all those versions.
 
 
 
