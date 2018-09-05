@@ -3,6 +3,8 @@
 
 *.pyc
 
+.cache
+
 test_results/
 
 !test_results/README.md
