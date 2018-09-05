@@ -6,3 +6,7 @@
 test_results/
 
 !test_results/README.md
+
+custom_tests/
+
+!custom_tests/README.md
