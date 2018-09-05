@@ -1,1 +1,1 @@
-
+Any tests that create files should be dropping them in this directory. The test script should always clear this directory (with the exception of this file) before execution, and all tests should verify that the files they should be creating don't exist prior to their execution.
