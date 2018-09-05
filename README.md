@@ -22,6 +22,17 @@ Start Cytoscape, then execute the following from within this projects root direc
 python CytoscapeEndToEndTests.py 
 ```
 
+Follow the directions and answer any questions when prompted. Occasionally, the Cytoscape window will take focus away from your terminal, so you may have to click on your terminal again to answer questions.
+
+When the script completes, it should finish with an OK status:
+
+```
+----------------------------------------------------------------------
+Ran 6 tests in 22.721s
+
+OK
+```
+
 ## Developers Notes
 
 After making any changes, execute unit tests via the following:
