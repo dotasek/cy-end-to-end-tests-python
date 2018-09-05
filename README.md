@@ -19,6 +19,7 @@ Then clone this project via git (or download as a zip).
 Start Cytoscape, then execute the following from within this projects root directory:
 
 ```
+cd CyTestSupport
 python CytoscapeEndToEndTests.py 
 ```
 
