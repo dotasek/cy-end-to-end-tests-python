@@ -72,7 +72,7 @@ class CytoscapeEndToEndTests(unittest.TestCase):
         self.assertTrue(os.path.exists(abspath))
         statinfo = os.stat(abspath)
         # Picked an arbitrary length here. We merely want to check that something was generated.
-        self.assertGreater(statinfo.st_size, 100000)
+        self.assertGreater(statinfo.st_size, 70000)
 
 
 if __name__ == '__main__':
