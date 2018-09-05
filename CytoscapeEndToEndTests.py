@@ -1,7 +1,6 @@
 import unittest
 import CyTestSupport
 import os.path
-import json
 
 try:
     # pylint: disable
@@ -10,7 +9,6 @@ except NameError:
     pass
 
 cyCaller = CyTestSupport.CyCaller()
-
 
 class CytoscapeEndToEndTests(unittest.TestCase):
 
@@ -23,28 +21,19 @@ class CytoscapeEndToEndTests(unittest.TestCase):
         self.assertTrue(result['allAppsStarted'])
 
     def test_galfiltered(self):
-        path = os.path.join("resources", "galFiltered.cys")
-        abspath = os.path.abspath(path)
-        result = cyCaller.get("/v1/session?file=" + abspath)
-        self.assertEqual(result['file'], abspath)
-        networks = cyCaller.get("/v1/networks")
-        self.assertEqual(len(networks), 1)
-        suid = networks[0]
+        cyCaller.load_file('galFiltered.cys')
+        suid = cyCaller.get_network_suid()
+
         edges = cyCaller.get("/v1/networks/"+str(suid)+"/edges")
         self.assertEqual(len(edges), 362)
         nodes = cyCaller.get("/v1/networks/"+str(suid)+"/nodes")
         self.assertEqual(len(nodes), 331)
         user_input = input("Is there a network of 331 nodes and 362 edges visible in Cytoscape (y/n)?")
-        self.assertEqual(user_input, "y")
+        self.assertTrue(CyTestSupport.TestUtils.is_yes(user_input))
 
     def test_diffusion(self):
-        path = os.path.join("resources", "galFiltered.cys")
-        abspath = os.path.abspath(path)
-        result = cyCaller.get("/v1/session?file=" + abspath)
-        self.assertEqual(result['file'], abspath)
-        networks = cyCaller.get("/v1/networks")
-        self.assertEqual(len(networks), 1)
-        suid = networks[0]
+        cyCaller.load_file('galFiltered.cys')
+        suid = cyCaller.get_network_suid()
         rows = cyCaller.get("/v1/networks/" + str(suid) + "/tables/defaultnode/rows")
         node_suid = -1
         for row in rows:
@@ -55,7 +44,14 @@ class CytoscapeEndToEndTests(unittest.TestCase):
         cyCaller.put("/v1/networks/"+str(suid) + "/nodes/selected", selected_nodes)
         cyCaller.post("/diffusion/v1/currentView/diffuse", None)
         user_input = input("Has Diffusion run and selected more nodes? (y/n)")
-        self.assertEqual(user_input, "y")
+        self.assertTrue(CyTestSupport.TestUtils.is_yes(user_input))
+
+    def test_layout(self):
+        cyCaller.load_file('galFiltered.cys')
+        suid = cyCaller.get_network_suid()
+        cyCaller.get("/v1/apply/layouts/circular/" + str(suid))
+        user_input = input("Has the network been laid out using the circular layout? (y/n)")
+        self.assertTrue(CyTestSupport.TestUtils.is_yes(user_input))
 
 
 if __name__ == '__main__':

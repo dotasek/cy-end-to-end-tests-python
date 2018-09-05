@@ -19,6 +19,18 @@ class CyRESTInstance:
         self.base_url = base_url
 
 
+class TestUtils:
+
+    def __init__(self):
+        """ Nothing here but static methods! """
+
+    @staticmethod
+    def is_yes(answer):
+        if answer.upper() == 'Y' or answer.upper() == 'YES':
+            return True
+        return False
+
+
 class CyCaller:
     """Basic functions for calling CyREST"""
 
@@ -79,3 +91,12 @@ class CyCaller:
     def delete(self, endpoint, data=None):
         """Execute a REST call using DELETE"""
         return self._execute("delete", endpoint, data=data)
+
+    def load_file(self, file_name):
+        path = os.path.join("resources", file_name)
+        abspath = os.path.abspath(path)
+        return self.get("/v1/session?file=" + abspath)
+
+    def get_network_suid(self):
+        networks = self.get("/v1/networks")
+        return networks[0]
