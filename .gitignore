@@ -5,10 +5,6 @@
 
 .cache
 
-test_results/
+CyRestSupport/test_results/
 
-!test_results/README.md
-
-custom_tests/
-
-!custom_tests/README.md
+!CyRestSupport/test_results/README.md
