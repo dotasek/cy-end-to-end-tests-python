@@ -1,1 +1,1 @@
-import from CyTestSupport import CyCaller
+from .CyTestSupport import CyCaller
