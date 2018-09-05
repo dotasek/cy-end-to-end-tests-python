@@ -5,6 +5,6 @@
 
 .cache
 
-CyRestSupport/test_results/
+!CyTestSupport/test_results/README.md
 
-!CyRestSupport/test_results/README.md
+CyTestSupport/test_results/
