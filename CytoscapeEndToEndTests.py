@@ -8,6 +8,16 @@ try:
 except NameError:
     pass
 
+folder = "test_results"
+for the_file in os.listdir("test_results"):
+    if the_file != "README.md":
+        file_path = os.path.join(folder, the_file)
+        try:
+            if os.path.isfile(file_path):
+                os.unlink(file_path)
+        except Exception as e:
+            print(e)
+
 cyCaller = CyTestSupport.CyCaller()
 
 class CytoscapeEndToEndTests(unittest.TestCase):
@@ -53,6 +63,18 @@ class CytoscapeEndToEndTests(unittest.TestCase):
         user_input = input("Has the network been laid out using the circular layout? (y/n)")
         self.assertTrue(CyTestSupport.TestUtils.is_yes(user_input))
 
+    def test_session_save(self):
+        path = os.path.join("test_results", "galFiltered_save.cys")
+        abspath = os.path.abspath(path)
+        self.assertFalse(os.path.exists(abspath))
+        cyCaller.load_file('galFiltered.cys')
+        cyCaller.post("/v1/session?file=" + abspath)
+        self.assertTrue(os.path.exists(abspath))
+        statinfo = os.stat(abspath)
+        # Picked an arbitrary length here. We merely want to check that something was generated.
+        self.assertGreater(statinfo.st_size, 100000)
+
 
 if __name__ == '__main__':
+    
     unittest.main()
