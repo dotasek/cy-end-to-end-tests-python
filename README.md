@@ -4,6 +4,8 @@ These Python tests are meant to be run alongside an installed Cytoscape release 
 
 ## Setup
 
+These tests are designed to be run on a clean system, with no pre-existing Cytoscape. Should a CytoscapeConfiguration directory exist, rename or move it to run cleanly.
+
 These tests are designed to be compatible with Python 2.7 and 3.0+. Python may already be installed on your system; if not, download and install Python from https://www.python.org/
 
 Once Python has been installed, the following has to be run to install the necessary Python packages:
