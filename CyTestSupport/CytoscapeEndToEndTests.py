@@ -26,7 +26,10 @@ class CytoscapeEndToEndTests(unittest.TestCase):
                     print(e)
 
         try:
-            cyCaller.get("/")
+            result = cyCaller.get("/")
+            if result['availableApiVersions'][0] != 'v1':
+                print ("Preliminary check of Cytoscape REST connection failed: " + result)
+                exit()
         except Exception as e:
             print ("Unable to connect to Cytoscape. Double check that Cytoscape has been started.")
             exit()
