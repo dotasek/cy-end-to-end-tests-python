@@ -78,7 +78,7 @@ class CytoscapeEndToEndTests(unittest.TestCase):
         version_dict = {
             'NetworkAnalyzer': "3.3.2",
             'Biomart Web Service Client': "3.3.2",
-            'CyNDEx-2': "2.2.3",
+            'CyNDEx-2': "2.2.4.SNAPSHOT",
             'cyREST': "3.8.0",
             'CyCL': "3.5.0",
             'Welcome Screen': "3.5.2",
@@ -90,16 +90,16 @@ class CytoscapeEndToEndTests(unittest.TestCase):
             'cyBrowser': "1.0.4",
             'BioPAX Reader': "3.3.3",
             'PSICQUIC Web Service Client': "3.4.0",
-            'Diffusion': "1.5.3",
+            'Diffusion': "1.5.4.SNAPSHOT",
             'PSI-MI Reader': "3.3.3",
             'SBML Reader': "3.3.4",
             'OpenCL Prefuse Layout': "3.5.0",
-            'CX Support': "2.2.3"
+            'CX Support': "2.2.4"
         }
         apps = cyCaller.post("/v1/commands/apps/list installed", None)
         for app in apps['data']:
             if app['appName'] in version_dict:
-                self.assertEqual(version_dict[app['appName']], app['version'])
+                self.assertEqual(version_dict[app['appName']], app['version'], "Expected version " + version_dict[app['appName']] + " of app " + app['appName'] + " but observed version " + app['version'])
             else:
                 print("An installed app is not included in core apps: " + app['appName'] + os.linesep)
 
