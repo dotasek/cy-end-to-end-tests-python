@@ -14,7 +14,7 @@ Once Python has been installed, the following has to be run to install the neces
 pip install requests
 ```
 
-Then clone this project via git (or download as a zip).
+Then download this project zip [here](https://github.com/dotasek/cy-end-to-end-tests-python/archive/master.zip) and unzip its contents, or clone via git.
 
 ## Execution
 
