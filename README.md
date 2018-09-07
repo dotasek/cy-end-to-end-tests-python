@@ -2,19 +2,23 @@
 
 These Python tests are meant to be run alongside an installed Cytoscape release or release candidate. They provide basic sanity checking and accompany manual testing.
 
-## Setup
+## Prerequisites
 
 These tests are designed to be run on a clean system, with no pre-existing Cytoscape. Should a CytoscapeConfiguration directory exist, rename or move it to run cleanly.
 
-These tests are designed to be compatible with Python 2.7 and 3.0+. Python may already be installed on your system; if not, download and install Python from https://www.python.org/
+1. These tests are designed to be compatible with Python 2.7 and 3.0+. Python may already be installed on your system; if not, download and install Python from https://www.python.org/
 
-Once Python has been installed, the following has to be run to install the necessary Python packages:
+2. Once Python has been installed, the following has to be run to install the necessary Python packages:
 
 ```
 pip install requests
 ```
 
-Then download this project zip [here](https://github.com/dotasek/cy-end-to-end-tests-python/archive/master.zip) and unzip its contents, or clone via git.
+3. These tests are designed to be run on a clean system, with no pre-existing Cytoscape. Should a CytoscapeConfiguration directory exist, rename or move it to run cleanly.
+
+## Installation
+
+Download this project zip [here](https://github.com/dotasek/cy-end-to-end-tests-python/archive/master.zip) and unzip its contents, or clone via git.
 
 ## Execution
 
