@@ -8,19 +8,28 @@ try:
 except NameError:
     pass
 
-folder = "test_results"
-for the_file in os.listdir("test_results"):
-    if the_file != "README.md":
-        file_path = os.path.join(folder, the_file)
-        try:
-            if os.path.isfile(file_path):
-                os.unlink(file_path)
-        except Exception as e:
-            print(e)
-
 cyCaller = CyTestSupport.CyCaller()
 
+
 class CytoscapeEndToEndTests(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        folder = "test_results"
+        for the_file in os.listdir("test_results"):
+            if the_file != "README.md":
+                file_path = os.path.join(folder, the_file)
+                try:
+                    if os.path.isfile(file_path):
+                        os.unlink(file_path)
+                except Exception as e:
+                    print(e)
+
+        try:
+            cyCaller.get("/")
+        except Exception as e:
+            print ("Unable to connect to Cytoscape. Double check that Cytoscape has been started.")
+            exit()
 
     def test_version(self):
         result = cyCaller.get("/v1/version")
@@ -105,5 +114,5 @@ class CytoscapeEndToEndTests(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    
     unittest.main()
+
