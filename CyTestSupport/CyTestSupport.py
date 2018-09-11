@@ -41,7 +41,7 @@ class CyCaller:
         self.cy_rest_instance = cy_rest_instance
 
     @staticmethod
-    def _return_ci_json(result):
+    def get_ci_data(result):
         """Pulls CI data out of a result or throws an exception"""
         return_json = CyCaller._return_json(result)
         if type(return_json) != dict:
@@ -74,7 +74,7 @@ class CyCaller:
                                   data=data,
                                   params=params,
                                   headers=headers)
-        return CyCaller._return_json(result)
+        return result
 
     def post(self, endpoint, data=None):
         """Execute a REST call using POST"""
@@ -99,4 +99,4 @@ class CyCaller:
 
     def get_network_suid(self):
         networks = self.get("/v1/networks")
-        return networks[0]
+        return networks.json()[0]
