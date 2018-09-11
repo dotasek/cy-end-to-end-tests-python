@@ -27,7 +27,7 @@ class CytoscapeEndToEndTests(unittest.TestCase):
 
         try:
             result = cyCaller.get("/")
-            if result['availableApiVersions'][0] != 'v1':
+            if result.json()['availableApiVersions'][0] != 'v1':
                 print ("Preliminary check of Cytoscape REST connection failed: " + result)
                 exit()
         except Exception as e:
@@ -36,19 +36,19 @@ class CytoscapeEndToEndTests(unittest.TestCase):
 
     def test_version(self):
         result = cyCaller.get("/v1/version")
-        self.assertEqual(result['cytoscapeVersion'], '3.7.0-SNAPSHOT')
+        self.assertEqual(result.json()['cytoscapeVersion'], '3.7.0-SNAPSHOT')
 
     def test_all_apps_started(self):
         result = cyCaller.get("/v1")
-        self.assertTrue(result['allAppsStarted'])
+        self.assertTrue(result.json()['allAppsStarted'])
 
     def test_galfiltered(self):
         cyCaller.load_file('galFiltered.cys')
         suid = cyCaller.get_network_suid()
 
-        edges = cyCaller.get("/v1/networks/"+str(suid)+"/edges")
+        edges = cyCaller.get("/v1/networks/"+str(suid)+"/edges").json()
         self.assertEqual(len(edges), 362)
-        nodes = cyCaller.get("/v1/networks/"+str(suid)+"/nodes")
+        nodes = cyCaller.get("/v1/networks/"+str(suid)+"/nodes").json()
         self.assertEqual(len(nodes), 331)
         user_input = input(os.linesep + "Is there a network of 331 nodes and 362 edges visible in Cytoscape (y/n)?")
         self.assertTrue(CyTestSupport.TestUtils.is_yes(user_input))
@@ -56,7 +56,7 @@ class CytoscapeEndToEndTests(unittest.TestCase):
     def test_diffusion(self):
         cyCaller.load_file('galFiltered.cys')
         suid = cyCaller.get_network_suid()
-        rows = cyCaller.get("/v1/networks/" + str(suid) + "/tables/defaultnode/rows")
+        rows = cyCaller.get("/v1/networks/" + str(suid) + "/tables/defaultnode/rows").json()
         node_suid = -1
         for row in rows:
             if row['COMMON'] == 'RAP1':
@@ -108,7 +108,7 @@ class CytoscapeEndToEndTests(unittest.TestCase):
             'OpenCL Prefuse Layout': "3.5.0",
             'CX Support': "2.2.4"
         }
-        apps = cyCaller.post("/v1/commands/apps/list installed", None)
+        apps = cyCaller.post("/v1/commands/apps/list installed", None).json()
         for app in apps['data']:
             if app['appName'] in version_dict:
                 self.assertEqual(version_dict[app['appName']], app['version'], "Expected version " + version_dict[app['appName']] + " of app " + app['appName'] + " but observed version " + app['version'])
