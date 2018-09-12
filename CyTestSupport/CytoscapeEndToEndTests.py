@@ -65,6 +65,10 @@ class CytoscapeEndToEndTests(unittest.TestCase):
         selected_nodes = [node_suid]
         cyCaller.put("/v1/networks/"+str(suid) + "/nodes/selected", selected_nodes)
         cyCaller.post("/diffusion/v1/currentView/diffuse", None)
+
+        diffusion_nodes = cyCaller.get("/v1/networks/"+str(suid)+"/nodes/selected")
+        self.assertGreater(len(diffusion_nodes.json()), 1)
+
         user_input = input(os.linesep + "Has Diffusion run and selected more nodes? (y/n)")
         self.assertTrue(CyTestSupport.TestUtils.is_yes(user_input))
 
